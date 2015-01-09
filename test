@@ -1,0 +1,11 @@
+files:
+    "/opt/elasticbeanstalk/hooks/appdeploy/pre/99_install.sh":
+      mode: "000755"
+      owner: root
+      group: root
+      content: |
+        #!/usr/bin/env bash
+        . /opt/elasticbeanstalk/support/envvars
+		aws s3 cp s3://srvs-environments/parameters-$PARAM1.yml $EB_CONFIG_APP_ONDECK/app/config/parameters.yml
+		bash $EB_CONFIG_APP_ONDECK/app/update-eb.sh
+		
